@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SearchBar } from './SearchBar/SearchBar';
+import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
@@ -68,7 +68,7 @@ export const App = () => {
   return (
     <>
       <Div>
-        <SearchBar onSubmit={onHandleSubmit} />
+        <Searchbar onSubmit={onHandleSubmit} />
         {images && <ImageGallery images={images} openModal={openModal} />}
         {query && images.length === 0 && (
           <p style={{ textAlign: 'center', fontSize: '24px' }}>
