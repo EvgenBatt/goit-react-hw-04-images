@@ -67,7 +67,7 @@ export const Input = styled.input`
   display: inline-block;
   width: 100%;
   font: inherit;
-  font-size: 18px;
+  font-size: 16px;
   border: none;
   outline: none;
   padding-left: 8px;

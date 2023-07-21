@@ -1,47 +1,80 @@
-import { Component } from 'react';
-import { Header, Form, Button, Span, Input } from './Searchbar.styled';
+import { useState } from 'react';
+import { Header, Form, Button, Span, Input } from './SearchBar.styled';
 import PropTypes from 'prop-types';
 
-export class Searchbar extends Component {
-  state = {
-    query: '',
+export const SearchBar = ({ onSubmit }) => {
+  const [query, setQuery] = useState('');
+
+  const handleInput = e => {
+    setQuery(e.currentTarget.value.toLowerCase().trim());
   };
 
-  handleInput = e => {
-    this.setState({ query: e.currentTarget.value.toLowerCase().trim() });
-  };
-
-  handleSubmit = e => {
-    const { query } = this.state;
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(query);
-    this.setState({ query: '' });
+    onSubmit(query);
+    setQuery('');
   };
 
-  render() {
-    const { query } = this.state;
+  return (
+    <Header>
+      <Form onSubmit={handleSubmit}>
+        <Button type="submit">
+          <Span>Search</Span>
+        </Button>
 
-    return (
-      <Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Button type="submit">
-            <Span>Search</Span>
-          </Button>
+        <Input
+          onChange={handleInput}
+          type="text"
+          autoComplete="off"
+          value={query}
+          autoFocus
+          placeholder="Search images and photos"
+        />
+      </Form>
+    </Header>
+  );
+};
 
-          <Input
-            onChange={this.handleInput}
-            type="text"
-            autoComplete="off"
-            value={query}
-            autoFocus
-            placeholder="Search images and photos"
-          />
-        </Form>
-      </Header>
-    );
-  }
-}
-
-Searchbar.propTypes = {
+SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+// export class SearchBar extends Component {
+//   state = {
+//     query: '',
+//   };
+
+//   handleInput = e => {
+//     this.setState({ query: e.currentTarget.value.toLowerCase().trim() });
+//   };
+
+//   handleSubmit = e => {
+//     const { query } = this.state;
+//     e.preventDefault();
+//     this.props.onSubmit(query);
+//     this.setState({ query: '' });
+//   };
+
+//   render() {
+//     const { query } = this.state;
+
+//     return (
+//       <Header>
+//         <Form onSubmit={this.handleSubmit}>
+//           <Button type="submit">
+//             <Span>Search</Span>
+//           </Button>
+
+//           <Input
+//             onChange={this.handleInput}
+//             type="text"
+//             autoComplete="off"
+//             value={query}
+//             autoFocus
+//             placeholder="Search images and photos"
+//           />
+//         </Form>
+//       </Header>
+//     );
+//   }
+// }
