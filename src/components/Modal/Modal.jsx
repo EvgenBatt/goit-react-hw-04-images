@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { Overlay, ModalDiv, Button } from './Modal.styled';
 
 export const Modal = ({ closeModal, bigImageUrl, imageTags }) => {
-  const handleEsc = e => {
-    if (e.code === 'Escape') {
-      closeModal();
-    }
-  };
-
   useEffect(() => {
+    const handleEsc = e => {
+      if (e.code === 'Escape') {
+        closeModal();
+      }
+    };
+
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
-  });
+  }, [closeModal]);
 
   const clickBackdrop = e => {
     if (e.target === e.currentTarget) {
